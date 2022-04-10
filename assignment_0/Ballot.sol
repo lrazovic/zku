@@ -28,11 +28,15 @@ contract Ballot {
     // A dynamically-sized array of `Proposal` structs.
     Proposal[] public proposals;
 
-    /// @dev The voting start time misured in
+    /// @dev The voting start time misured in seconds since epoch.
     uint256 startTime;
 
+    /// @dev We limit the the voting period of each Ballot to 5 minutes.
     modifier voteEnded() {
-        require(startTime > 2, "Too soon!");
+        require(
+            block.timestamp < startTime + 5 minutes,
+            "Voting period is over"
+        );
         _;
     }
 
@@ -50,6 +54,8 @@ contract Ballot {
             // appends it to the end of `proposals`.
             proposals.push(Proposal({name: proposalNames[i], voteCount: 0}));
         }
+        // Timestamp of the current block in seconds since the epoch
+        startTime = block.timestamp;
     }
 
     // Give `voter` the right to vote on this ballot.
@@ -115,7 +121,7 @@ contract Ballot {
 
     /// Give your vote (including votes delegated to you)
     /// to proposal `proposals[proposal].name`.
-    function vote(uint proposal) external voteEnded{
+    function vote(uint proposal) external voteEnded {
         Voter storage sender = voters[msg.sender];
         require(sender.weight != 0, "Has no right to vote");
         require(!sender.voted, "Already voted.");
