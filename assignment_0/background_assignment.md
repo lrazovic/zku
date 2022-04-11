@@ -2,7 +2,7 @@
 
 ### What is a smart contract? How are they deployed? You should be able to describe how a smart contract is deployed and the necessary steps.
 
-In "[Smart Contracts][1]" Nick Szabo defines a smart contract as a computerized transaction protocol that executes the terms of a contract. Contract Accounts (CAs) can be triggered by humans sending a transaction or by other contracts sending a message. When executed, can perform arbitrarily complex operations, allowing it to read and write to internal storage and send other messages, or create contracts. In the Ethereum environment contracts run (in a logical sense) on the *Ethereum Virtual Machine (EVM)*. We can think of the EVM as an emulation of a single, global “computer” in which all transactions are local on each node of the network and are executed in relative synchrony. Smart contracts run *EVM bytecode* when receiving a transaction, allowing them to perform calculations and further transactions. Smart Contracts can be written in a high-level language like Solidity or Vyper, they will be *compiled* in EVM bytecode. Deploying the smart contract on the blockchain is just sending a transaction containing the code of the compiled smart contract without specifying any recipients. In principle to deploy a smart contract you need:
+In "[Smart Contracts][1]" Nick Szabo defines a smart contract as a computerized transaction protocol that executes the terms of a contract. Contract Accounts can be triggered by humans sending a transaction, or by other contracts sending a message. When executed, can perform arbitrarily complex operations, allowing it to read and write to internal storage and send other messages, or create contracts. In the Ethereum environment contracts run (in a logical sense) on the *Ethereum Virtual Machine (EVM)*. We can think of the EVM as an emulation of a single, global “computer” in which all transactions are local on each node of the network and are executed in relative synchrony. Smart contracts run *EVM bytecode* when receiving a transaction, allowing them to perform calculations and further transactions. Smart Contracts can be written in a high-level language like Solidity or Vyper, they will be *compiled* in EVM bytecode. Deploying the smart contract on the blockchain is just sending a transaction containing the code of the compiled smart contract without specifying any recipients. In principle to deploy a smart contract you need:
 1. The contract's bytecode.
 2. An Ethereum node.
 3. ETH for paying gas.
@@ -39,13 +39,28 @@ A hash function is a deterministic mathematical function that maps a set of inpu
 In cryptographic applications the hash function is required to have the following properties:
 1. preimage resistance: it must be computationally intractable to search for an input string that gives a hash equal to a given hash;
 2. resistance to second pre-image: it is computationally intractable to search for an input string that gives a hash equal to a given string;
-3. collision resistance: it is computationally intractable to search for a pair of input strings that give the same hash.
+3. collision resistance: it is computationally intractable to search for a pair of inputs that give the same hash.
+
+Hash functions are not reversible. The output of a hash function is a fixed-length string of characters called digest or simply a hash. Since are not reversible hashes are not necessarily intended to be kept secret because they cannot be converted back into their original values. People can use hashing to hide from third-party sensitive information, e.g. a password, and save only the computed hash. If we save sensitive information using hash an attacker can perform a [rainbow table][3] attack, so it's best practice for secure password storage to combine each password with a randomly generated string of characters called a "salt" and then to hash the result.
 
 ### How would you prove to a colorblind person that two different colored objects are actually of different colors?
 
 ## B. You sure you’re solid with Solidity?
 
+### Program a super simple “Hello World” smart contract: write a storeNumber function to store an unsigned integer and then a retrieveNumber function to retrieve it.
+
+The code is available on [GitHub][4].
+
+### On the documentation page, the “Ballot” contract demonstrates a lot of features on Solidity. Read through the script and try to understand what each line of code is doing.
+
+Ballot
+
+
+### Suppose we want to limit the voting period of each Ballot contract to 5 minutes. 
+
+The code is available on [GitHub][5].
 
 
 [1]: https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html "Smart Contracts"
 [2]: https://ethereum.github.io/yellowpaper/paper.pdf "Yellow Paper"
+[3]: https://en.wikipedia.org/wiki/Rainbow_table "Rainbow Table"
