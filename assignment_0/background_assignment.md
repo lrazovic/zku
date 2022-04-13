@@ -47,13 +47,23 @@ Hash functions are not reversible. The output of a hash function is a fixed-leng
 
 ## B. You sure you’re solid with Solidity?
 
-### Program a super simple “Hello World” smart contract: write a storeNumber function to store an unsigned integer and then a retrieveNumber function to retrieve it.
+### Program a super simple “Hello World” smart contract.
 
 The code is available on [GitHub][4].
 
 ### On the documentation page, the “Ballot” contract demonstrates a lot of features on Solidity. Read through the script and try to understand what each line of code is doing.
 
-Ballot
+Line 1: SPDX, an easy way to label your source code’s licenses, in this case GPL3.
+Line 2: The solidity compiler version acceprted, more or equol of 0.7 and less than 0.9.
+Line 5: The contract name.
+Line 9 to 14: A \struct\ Voter it's defined, you can now use Voter as it would be a primitive type.
+Line 17 to 19: Another \struct\ for another complex type, that represents a Proposal.
+Line 22: A public state variable called \chairperson\ is defined, of type \address\
+Line 26: A new \mapping\ is created, it is a map that has as key address and as a value a Voter.
+Line 29: A dynamically-sized array of `Proposal` structs.
+Line 32: A 
+Line 44: Il costruttuore che viene chiamto quando il contratto viene instanziato. Chi ha creato il contratto diventa il \chairperson\ e viene aggiornato il mapping voters (con chiave chairperson il valore di weight diventa = 1). Per ogni nome di proposta passata nel costruttore viene creata una nuova Proposal ed aggiunta all'array proposals. Viene fissato il tempo di creazione del contratto in startTime.
+Line 63: La funcione \giveRightToVote\ prende in input un address e contratta se chi ha chiamato la funzione è il chairperson. Poi controlla se l'address in input ha già votato 
 
 
 ### Suppose we want to limit the voting period of each Ballot contract to 5 minutes. 
@@ -64,3 +74,5 @@ The code is available on [GitHub][5].
 [1]: https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html "Smart Contracts"
 [2]: https://ethereum.github.io/yellowpaper/paper.pdf "Yellow Paper"
 [3]: https://en.wikipedia.org/wiki/Rainbow_table "Rainbow Table"
+[4]: https://github.com/lrazovic/zku/blob/main/assignment_0/HelloWorld.sol "Hello, World!"
+[5]: https://github.com/lrazovic/zku/blob/main/assignment_0/Ballot.sol "Ballot with 5 minutes deadline"
