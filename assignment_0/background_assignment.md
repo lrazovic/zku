@@ -45,6 +45,8 @@ Hash functions are not reversible. The output of a hash function is a fixed-leng
 
 ### How would you prove to a colorblind person that two different colored objects are actually of different colors?
 
+A person who is not affected by dyschromatopsia, identifies the color of two objects and communicates to color blind people the colors. The color-blind person then takes them in his hand and hides the objects behind him and has two options: he can swap them or leave them in the current hand. Then he shows the objects again to the other person who communicates the colors again. After a series of iterations of possible color swaps and assignments, he can reach a certain level of confidence that the colors of the objects are those assigned by the other person.
+
 ## B. You sure you’re solid with Solidity?
 
 ### Program a super simple “Hello World” smart contract.
@@ -53,17 +55,21 @@ The code is available on [GitHub][4].
 
 ### On the documentation page, the “Ballot” contract demonstrates a lot of features on Solidity. Read through the script and try to understand what each line of code is doing.
 
-Line 1: SPDX, an easy way to label your source code’s licenses, in this case GPL3.
-Line 2: The solidity compiler version acceprted, more or equol of 0.7 and less than 0.9.
-Line 5: The contract name.
-Line 9 to 14: A \struct\ Voter it's defined, you can now use Voter as it would be a primitive type.
-Line 17 to 19: Another \struct\ for another complex type, that represents a Proposal.
-Line 22: A public state variable called \chairperson\ is defined, of type \address\
-Line 26: A new \mapping\ is created, it is a map that has as key address and as a value a Voter.
-Line 29: A dynamically-sized array of `Proposal` structs.
-Line 32: A 
-Line 44: Il costruttuore che viene chiamto quando il contratto viene instanziato. Chi ha creato il contratto diventa il \chairperson\ e viene aggiornato il mapping voters (con chiave chairperson il valore di weight diventa = 1). Per ogni nome di proposta passata nel costruttore viene creata una nuova Proposal ed aggiunta all'array proposals. Viene fissato il tempo di creazione del contratto in startTime.
-Line 63: La funcione \giveRightToVote\ prende in input un address e contratta se chi ha chiamato la funzione è il chairperson. Poi controlla se l'address in input ha già votato 
+Line 1: SPDX, an easy way to label your source code’s licenses, in this case GPL3.\
+Line 2: The solidity compiler version accepted, more or equal of 0.7 and less than 0.9.\
+Line 5: The contract name.\
+Line 9 to 14: A `struct` Voter it's defined, you can now use `Voter` as it would be a primitive type.\
+Line 17 to 19: Another `struct` for another complex type, that represents a `Proposal`.\
+Line 22: A public state variable called `chairperson` is defined, of type `address`\
+Line 26: A new `mapping` is created, it is a map that has as key address and as a value a `Voter`.\
+Line 29: A dynamically-sized array of `Proposal` structs.\
+Line 32: A public state variable called that represents the  voting start time measured in seconds since epoch.\
+Line 44: The constructor that is called when the contract is instantiated. Who created the contract becomes the `chairperson` and the mapping voters is updated (with key `chairperson` and the value of weight becomes` 1`). For each proposal name passed into the constructor a new `Proposal` is created and added to the proposals array. The creation time of the contract is set in `startTime`.\
+Line 63: The `giveRightToVote` function takes an address as input and checks if the person who called the function is the `chairperson`. It then checks to see if the input address has already voted.\
+Line 84: If the caller hasn't already voted, he/she can delegate his/her vote to another account.\
+Line 124: Give the caller's vote to the given proposal.\
+Line 139: Computes the winning proposal, it simply takes the maximum `voteCount` value in the `proposals` array.\
+Line 152: Returns the name of the winner, computed by `winningProposal()`.\
 
 
 ### Suppose we want to limit the voting period of each Ballot contract to 5 minutes. 

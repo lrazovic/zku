@@ -28,7 +28,7 @@ contract Ballot {
     // A dynamically-sized array of `Proposal` structs.
     Proposal[] public proposals;
 
-    /// @dev The voting start time misured in seconds since epoch.
+    /// @dev The voting start time measured in seconds since epoch.
     uint256 startTime;
 
     /// @dev We limit the the voting period of each Ballot to 5 minutes.
