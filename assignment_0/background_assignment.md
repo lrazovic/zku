@@ -6,7 +6,7 @@ In "[Smart Contracts][1]" Nick Szabo defines a smart contract as a computerized 
 1. The contract's bytecode.
 2. An Ethereum node.
 3. ETH for paying gas.
-4. A deployment script or plugin.\
+4. A deployment script or plugin.
 
 We can use tools like [Hardhat](https://hardhat.org) or [Truffle](https://trufflesuite.com) to automatize all the steps described before. For example using Hardhat, once correctly installed by following the documentation on the site, we can launch a local node using `npx hardhat node`. This will generates also 20 accounts with 1000 ETH, which should be sufficient for a lot of local deployments/testing. We can write a script in JavaScript that deploy the contract on the specified chain (the local one by default, but we can also deploy it on Testnets/Mainnet leveraging services like Infura/Alchemy) and execute the script using `npx hardhat run path/to/script.js`
 
@@ -45,13 +45,16 @@ Hash functions are not reversible. The output of a hash function is a fixed-leng
 
 ### How would you prove to a colorblind person that two different colored objects are actually of different colors?
 
-A person who is not affected by dyschromatopsia, identifies the color of two objects and communicates to color blind people the colors. The color-blind person then takes them in his hand and hides the objects behind him and has two options: he can swap them or leave them in the current hand. Then he shows the objects again to the other person who communicates the colors again. After a series of iterations of possible color swaps and assignments, he can reach a certain level of confidence that the colors of the objects are those assigned by the other person.
+A person who is not affected by dyschromatopsia, identifies the color of two objects and communicates to the colorblind the colors. The colorblind person then takes them in his hand and hides the objects behind him and has two options: he can swap them or leave them in the current hand. Then he shows the objects again to the other person who communicates the colors again. After a series of iterations of possible objects swaps and assignments, he can reach a certain level of confidence that the colors of the objects are actually different.
 
 ## B. You sure you’re solid with Solidity?
 
 ### Program a super simple “Hello World” smart contract.
 
 The code is available on [GitHub][4].
+
+![](./images/hello.png)
+*Deploy of the HelloWorld contract*
 
 ### On the documentation page, the “Ballot” contract demonstrates a lot of features on Solidity. Read through the script and try to understand what each line of code is doing.
 
@@ -64,18 +67,25 @@ Line 22: A public state variable called `chairperson` is defined, of type `addre
 Line 26: A new `mapping` is created, it is a map that has as key address and as a value a `Voter`.\
 Line 29: A dynamically-sized array of `Proposal` structs.\
 Line 32: A public state variable called that represents the  voting start time measured in seconds since epoch.\
-Line 44: The constructor that is called when the contract is instantiated. Who created the contract becomes the `chairperson` and the mapping voters is updated (with key `chairperson` and the value of weight becomes` 1`). For each proposal name passed into the constructor a new `Proposal` is created and added to the proposals array. The creation time of the contract is set in `startTime`.\
-Line 63: The `giveRightToVote` function takes an address as input and checks if the person who called the function is the `chairperson`. It then checks to see if the input address has already voted.\
-Line 84: If the caller hasn't already voted, he/she can delegate his/her vote to another account.\
-Line 124: Give the caller's vote to the given proposal.\
-Line 139: Computes the winning proposal, it simply takes the maximum `voteCount` value in the `proposals` array.\
-Line 152: Returns the name of the winner, computed by `winningProposal()`.\
-
+Line 44 to 59: The constructor that is called when the contract is instantiated. Who created the contract becomes the `chairperson` and the mapping voters is updated (with key `chairperson` and the value of weight becomes` 1`). For each proposal name passed into the constructor a new `Proposal` is created and added to the proposals array. The creation time of the contract is set in `startTime`.\
+Line 63 to 81: The `giveRightToVote` function takes an address as input and checks if the person who called the function is the `chairperson`. It then checks to see if the input address has already voted.\
+Line 84 to 120: If the caller hasn't already voted, he/she can delegate his/her vote to another account.\
+Line 124 to 135: Give the caller's vote to the given proposal.\
+Line 139 to 147: Computes the winning proposal, it simply takes the maximum `voteCount` value in the `proposals` array.\
+Line 152 to 154: Returns the name of the winner, computed by `winningProposal()`.
 
 ### Suppose we want to limit the voting period of each Ballot contract to 5 minutes. 
 
 The code is available on [GitHub][5].
 
+![Deploy](./images/deploy.png)
+*Deploy of the Ballot contract*
+
+![Vote before 5 minutes](./images/vote0.png)
+*Vote before 5 minutes*
+
+![Vote after 5 minutes](./images/vote1.png)
+*Vote after 5 minutes*
 
 [1]: https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/smart.contracts.html "Smart Contracts"
 [2]: https://ethereum.github.io/yellowpaper/paper.pdf "Yellow Paper"
